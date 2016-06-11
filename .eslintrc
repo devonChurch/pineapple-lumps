@@ -1,0 +1,12 @@
+{
+    "parser": "babel-eslint",
+    "extends": "airbnb-base",
+    "parserOptions": {
+        "ecmaVersion": 6,
+    },
+    "rules": {
+        "padded-blocks": 0,
+        "indent": [1, "tab"],
+        "no-underscore-dangle": 0
+    }
+}
