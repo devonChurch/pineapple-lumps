@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "cd ./spec && node test.js",
-    "debug": "cd ./spec && DEBUG=SD:year,SD:month,SD:debug,SD:daysInMonth node debug.js",
+    "debug": "cd ./spec && DEBUG=SD:* node debug.js",
     "build:development": "webpack --watch",
     "build:production": "webpack -p"
   },

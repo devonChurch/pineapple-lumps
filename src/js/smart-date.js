@@ -29,22 +29,44 @@ const _day = debug('SD:day');
  */
 function smartDate(supplied, test) {
 
-
 	const
+
+    /**
+     * The way in which the date formats are being supplied to the client side
+     * is in an unreliable configuration. In that regard we need to reformat the
+     * date structure into something more applicable. See the below link for
+     * compatible date formats http://dygraphs.com/date-formats.html
+     * @param {string} raw - The original supplied date.
+     * @return {string} The configured date format.
+     */
+    reformat = (raw) => {
+
+        const _reformat = debug('SD:reformat');
+
+        const date = raw.replace(/-/g, '/').replace(/T/g, ' ');
+        const index = date.indexOf('+');
+
+        _reformat(`from ${raw} to ${date.substr(0, index)}`);
+        const foo = new Date(date.substr(0, index));
+        _reformat(foo);
+
+        return date.substr(0, index);
+
+    },
 
 	/**
 	 * Generate a new launch data object from the supplied date param. If the
 	 * supplied format is not applicable then we sign false and return an
 	 * corresponding value (empty string).
 	 */
-	launch = supplied ? new Date(supplied) : false,
+	launch = supplied ? new Date(reformat(supplied)) : false,
 
 	/**
 	 * Generate a new date for the current browser time. We also query the test
 	 * parameter here to see if we should instead use a predefined date format
 	 * for testing purposes.
 	 */
-	now = test && typeof test === 'string' ? new Date(test) : new Date(),
+	now = test && typeof test === 'string' ? new Date(reformat(test)) : new Date(),
 
 	/**
 	 * Days are currently using the USA format where the week starts with Sunday.
@@ -208,9 +230,6 @@ function smartDate(supplied, test) {
 			// this months total days
 			// remaining days
 
-            _month(today.getTime());
-            _month(convertToDays(today.getTime()));
-
 			_month(`today = ${today}`);
 			_month(`days = ${days}`);
 
@@ -230,58 +249,27 @@ function smartDate(supplied, test) {
                 year = year ? nextYear() : today.getFullYear();
                 date = new Date(`${year}/${month}/${1}`);
                 max = daysInMonth(date);
-                min = months === 0 ? today.getDate() : 0;
+                min = months === 0 ? today.getDate() - 1 : 0;
                 comparison = max - min;
 
-
-                // min = months ? today.getTime() : new Date(`${year}/${month}/${1}`).getTime();
-                // max = maximiumDays(year, month).getTime();
-                // // max = daysInMonth(5);
-                // comparison = convertToDays(max - min);
-
-                // remove the max num of days in a month
-                // OR
-                // the dirrerence between the current day and the end of the month
-
+                _month(`date = ${date}`);
                 _month(`min = ${min}`);
                 _month(`max = ${max}`);
                 _month(`comparison = ${comparison}`);
-
-
-				// year = year ? nextYear() : today.getFullYear();
-				// month = month ? nextMonth() : today.getMonth() + 1;
-				// max = maximiumDays(year, month).getTime();
-				// comparison = months ? convertToDays(max) : convertToDays(max - today.getTime());
-
-
-                // year = year ? nextYear() : today.getFullYear();
-                // month = month ? nextMonth() : today.getMonth() + 1;
-                // min = !months ? today.getTime() : new Date(`${year}/${month}/${1}`).getTime();
-                // max = maximiumDays(year, month).getTime();
-                // comparison = convertToDays(max - min);
+                _month(`days < comparison = ${days} < ${comparison}`);
 
 
 				// Break out of the loop if its not relevance to continue.
-				_month(`days < comparison = ${days} < ${comparison}`);
-				// if (days < comparison) break;
 				if (days < comparison) break;
 
+                _month('RELEVANT');
                 days -= comparison;
 				// months += 1; // days > comparison ? 1 : 0;
-				_month(`comparison >= max = ${comparison} >= ${max}`);
+				// _month(`comparison >= max = ${comparison} >= ${max}`);
 				months += 1; // comparison >= max ? 1 : 0;
 				// months += months === 0 ? 1 : max < days ? 1 : 0; // comparison >= max ? 1 : 0;
 
-
-				_month('RELEVANT');
-
-                // _month(`current = ${current}`);
-
-				_month(`today = ${today}`);
-				// _month(`comparison = ${comparison}`);
-				// _month(`relevance = ${days > comparison}`);
-				// _month(`days = ${days}`);
-
+				_month(`days = ${days}`);
 				_month(`months = ${months}`);
 				_month(' - - - - ');
 
@@ -295,9 +283,8 @@ function smartDate(supplied, test) {
 
 		year(today, days) {
 
-			_year(`DURATION | YEAR: today = ${today}`);
-			_year(`DURATION | YEAR: days = ${days}`);
-			_year(' - - - - ');
+			_year(`today = ${today}`);
+			_year(`days = ${days}`);
 
 			let year, current, comparison;
 			let years = 0;
@@ -334,16 +321,39 @@ function smartDate(supplied, test) {
 
 	},
 
+    hasFinished = () => {
+
+        const _hasFinished = debug('SD:hasFinished');
+
+        _hasFinished(`now = ${now}`);
+        _hasFinished(`launch = ${launch}`);
+
+        // _hasFinished(`now = ${now} | ${now.getTime()} | 2016-01-01T12:00:00+12:00`);
+        // _hasFinished(`launch = ${launch} | ${launch.getTime()} | 2016-01-01T11:59:59+12:00`);
+        _hasFinished(`now > launch = ${now.getTime() > launch.getTime()}`);
+
+
+        // 2016-01-01T11:59:59+12:00
+        // 2016-01-01T12:00:00+12:00
+
+        return now.getTime() > launch.getTime();
+    },
+
 	calcSeperaton = (today, days) => {
 
-		if (days < 0) return 'Finished';
+        const _calcSeperaton = debug('SD:calcSeperaton');
+
+        _calcSeperaton(`today = ${today}`);
+        _calcSeperaton(`has finished? = ${hasFinished()}`);
+
+		if (hasFinished()) return 'Finished';
 		else if (days === 0) return 'Today';
 		else if (days === 1) return 'Tomorrow';
 
 		for (const unit of ['year', 'month', 'week']) {
 
 			const value = duration[unit](today, days);
-			// console.log(`SEPERATION: ${unit} = ${value}`);
+			_calcSeperaton(`${unit} = ${value}`);
 			if (value) return speechPattern(value, unit);
 
 		}
@@ -354,13 +364,27 @@ function smartDate(supplied, test) {
 
 	rebaseDate = (ref) => {
 
+        const _rebaseDate = debug('SD:rebaseDate');
+
+        // ref.setHours(0);
+
 		// 2009/07/12
 		const year = ref.getFullYear();
 		const month = ref.getMonth() + 1;
 		const date = ref.getDate();
 		const format = `${year}/${month}/${date}`;
 
+        _rebaseDate(ref);
+        _rebaseDate(`year = ${year}`);
+        _rebaseDate(`month = ${month}`);
+        _rebaseDate(`date = ${date}`);
+        _rebaseDate(`format = ${format}`);
+
 		return new Date(format);
+
+        // ref.setHours(0);
+        // ref.setHours(0);
+        // ref.setHours(0);
 
 	},
 
@@ -369,9 +393,6 @@ function smartDate(supplied, test) {
 		const today = rebaseDate(now);
 		const startDay = rebaseDate(launch);
 		const comparison = startDay.getTime() - today.getTime();
-
-		// console.log(`COMPARISON: launch = ${startDay} | now = ${today}`);
-		// console.log(`COMPARISON: ${today.getTime()} - ${startDay.getTime()} = ${comparison}`);
 
 		return {today, comparison};
 
@@ -383,16 +404,9 @@ function smartDate(supplied, test) {
 		const days = convertToDays(comparison);
 		const seperation = calcSeperaton(today, days);
 
-		console.log(`VERBALISE: ${days}`);
-
-
 		return seperation;
 
 	},
-
-	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-	// GENERIC:
-	// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 	calcDay = () => {
 
@@ -443,8 +457,6 @@ function smartDate(supplied, test) {
 
 		const hours = launch.getHours();
 
-		console.log(`HOURS: raw = ${hours}`);
-
 		return hours > 12 ? `${hours - 12}pm` : `${hours}am`;
 
 	},
@@ -477,30 +489,27 @@ function smartDate(supplied, test) {
 	init = () => `${calcVerbalize()} ${calcDay()} ${calcDate()} ${calcMonth()} ${calcHours()} ${calcZone()}`,
 
 	// relevance = () => launch && launch.getTime() ? true : false;
-	relevance = () => launch && launch.getTime();
+	relevance = () => launch && launch.getTime(),
 
 	// I am going to expose the private API to make it easier to test since there are still
 	// things up in the air regarding the various systems i.e elapsed dates / time zones.
 	// This will make the Jasmine testing more direct and remote the superfluousness.
-    // switch (test) {
-    //     case true:
-    //         _general('test mode');
-    //         return {relevance, init, calcDay, calcDate, calcMonth, calcYear, calcHours, calcVerbalize};
-    //     default:
-    //         _general('live mode');
-    //         return relevance() ? init() : '';
-    // }
-	if (test) {
+    environment = test ? 'development' : 'production';
 
-        _general('test mode');
-		return {relevance, init, calcDay, calcDate, calcMonth, calcYear, calcHours, calcVerbalize};
+    _general(`now = ${now}`);
+    _general(`launch = ${launch}`);
 
-	} else {
+    switch (environment) {
 
-        _general('live mode');
-		return relevance() ? init() : '';
+        case 'development':
+            _general('test mode');
+            return {relevance, init, calcDay, calcDate, calcMonth, calcYear, calcHours, calcVerbalize};
 
-	}
+        default:
+            _general('live mode');
+            return relevance() ? init() : '';
+
+    }
 
 }
 
