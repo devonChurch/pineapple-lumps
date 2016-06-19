@@ -482,7 +482,9 @@ function smartDate(supplied, test) {
 		// not return the format you are after
 		// http://caniuse.com/#search=DateTimeFormat
 
-		return 'Dunno?';
+		const dunno = 'Dunno?';
+
+		return dunno;
 
 	},
 

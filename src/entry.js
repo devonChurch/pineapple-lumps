@@ -1,1 +1,2 @@
-const smartDate = require('./js/smart-date');
+const pineappleLumps = require('./js/smart-date');
+module.exports = pineappleLumps;

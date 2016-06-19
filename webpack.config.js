@@ -6,7 +6,10 @@ module.exports = {
     entry: './entry.js',
     output: {
         path: __dirname + '/dist',
-        filename: 'bundle.js'
+        filename: 'pineapple-lumps.js',
+        library: 'pineappleLumps',
+        libraryTarget: 'umd',
+        umdNamedDefine: true
     },
     module: {
         loaders: [

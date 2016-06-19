@@ -1,8 +1,8 @@
 {
   "name": "pineapple-lumps",
-  "version": "1.0.0",
+  "version": "0.0.6",
   "description": "",
-  "main": "index.js",
+  "main": "dist/pineapple-lumps.js",
   "scripts": {
     "test": "cd ./spec && node test.js",
     "debug": "cd ./spec && DEBUG=SD:* node debug.js",

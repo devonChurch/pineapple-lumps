@@ -1,4 +1,14 @@
-/******/ (function(modules) { // webpackBootstrap
+(function webpackUniversalModuleDefinition(root, factory) {
+	if(typeof exports === 'object' && typeof module === 'object')
+		module.exports = factory();
+	else if(typeof define === 'function' && define.amd)
+		define("pineappleLumps", [], factory);
+	else if(typeof exports === 'object')
+		exports["pineappleLumps"] = factory();
+	else
+		root["pineappleLumps"] = factory();
+})(this, function() {
+return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
 /******/
@@ -46,7 +56,8 @@
 
 	'use strict';
 	
-	var smartDate = __webpack_require__(1);
+	var pineappleLumps = __webpack_require__(1);
+	module.exports = pineappleLumps;
 
 /***/ },
 /* 1 */
@@ -533,7 +544,9 @@
 			// not return the format you are after
 			// http://caniuse.com/#search=DateTimeFormat
 	
-			return 'Dunno?';
+			var dunno = 'Dunno?';
+	
+			return dunno;
 		},
 		    init = function init() {
 			return calcVerbalize() + ' ' + calcDay() + ' ' + calcDate() + ' ' + calcMonth() + ' ' + calcHours() + ' ' + calcZone();
@@ -1078,5 +1091,7 @@
 
 
 /***/ }
-/******/ ]);
-//# sourceMappingURL=bundle.js.map
+/******/ ])
+});
+;
+//# sourceMappingURL=pineapple-lumps.js.map
