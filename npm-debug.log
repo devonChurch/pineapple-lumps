@@ -1,0 +1,117 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/Users/devon-church/.nvm/versions/v5.0.0/bin/node',
+1 verbose cli   '/Users/devon-church/.nvm/versions/v5.0.0/bin/npm',
+1 verbose cli   'publish' ]
+2 info using npm@3.3.6
+3 info using node@v5.0.0
+4 verbose publish [ '.' ]
+5 silly cache add args [ '.', null ]
+6 verbose cache add spec .
+7 silly cache add parsed spec Result {
+7 silly cache add   raw: '.',
+7 silly cache add   scope: null,
+7 silly cache add   name: null,
+7 silly cache add   rawSpec: '.',
+7 silly cache add   spec: '/Users/devon-church/Documents/projects/pineapple-lumps',
+7 silly cache add   type: 'directory' }
+8 verbose addLocalDirectory /Users/devon-church/.npm/pineapple-lumps/0.0.8/package.tgz not in flight; packing
+9 info lifecycle pineapple-lumps@0.0.8~prepublish: pineapple-lumps@0.0.8
+10 silly lifecycle pineapple-lumps@0.0.8~prepublish: no script for prepublish, continuing
+11 verbose tar pack [ '/Users/devon-church/.npm/pineapple-lumps/0.0.8/package.tgz',
+11 verbose tar pack   '/Users/devon-church/Documents/projects/pineapple-lumps' ]
+12 verbose tarball /Users/devon-church/.npm/pineapple-lumps/0.0.8/package.tgz
+13 verbose folder /Users/devon-church/Documents/projects/pineapple-lumps
+14 verbose addLocalTarball adding from inside cache /Users/devon-church/.npm/pineapple-lumps/0.0.8/package.tgz
+15 silly cache afterAdd pineapple-lumps@0.0.8
+16 verbose afterAdd /Users/devon-church/.npm/pineapple-lumps/0.0.8/package/package.json not in flight; writing
+17 verbose afterAdd /Users/devon-church/.npm/pineapple-lumps/0.0.8/package/package.json written
+18 silly publish { name: 'pineapple-lumps',
+18 silly publish   version: '0.0.8',
+18 silly publish   description: 'A smart date tool for comparing the duration between the current time and a given date reference expressed in a verbalised format.',
+18 silly publish   main: 'dist/pineapple-lumps.js',
+18 silly publish   scripts:
+18 silly publish    { test: 'cd ./spec && node test.js',
+18 silly publish      debug: 'cd ./spec && DEBUG=SD:* node debug.js',
+18 silly publish      'build:development': 'webpack --watch',
+18 silly publish      'build:production': 'webpack -p' },
+18 silly publish   repository:
+18 silly publish    { type: 'git',
+18 silly publish      url: 'git+https://github.com/devonChurch/pineapple-lumps.git' },
+18 silly publish   author: '',
+18 silly publish   license: 'MIT',
+18 silly publish   bugs: { url: 'https://github.com/devonChurch/pineapple-lumps/issues' },
+18 silly publish   homepage: 'https://github.com/devonChurch/pineapple-lumps#readme',
+18 silly publish   devDependencies:
+18 silly publish    { 'babel-core': '^6.9.1',
+18 silly publish      'babel-eslint': '^6.0.4',
+18 silly publish      'babel-loader': '^6.2.4',
+18 silly publish      'babel-preset-es2015': '^6.9.0',
+18 silly publish      'babel-preset-stage-0': '^6.5.0',
+18 silly publish      'babel-preset-stage-1': '^6.5.0',
+18 silly publish      'babel-preset-stage-2': '^6.5.0',
+18 silly publish      'babel-preset-stage-3': '^6.5.0',
+18 silly publish      'babel-register': '^6.9.0',
+18 silly publish      debug: '^2.2.0',
+18 silly publish      eslint: '^2.12.0',
+18 silly publish      'eslint-config-airbnb-base': '^3.0.1',
+18 silly publish      'eslint-loader': '^1.3.0',
+18 silly publish      'eslint-plugin-import': '^1.8.1',
+18 silly publish      jasmine: '^2.4.1',
+18 silly publish      webpack: '^1.13.1' },
+18 silly publish   readme: '# Pineapple Lumps\n\nA smart date tool for comparing the duration between the current time and a given date reference expressed in a verbalised format.\n\n## Todo\'s\n\n***This project is still a work in progress.***\n- Add in an event duration comparison.\n- Have the ability to extract, change and compare different time zones on the fly.\n\n## Installation\n\n- Install the package as a dependancy.\n```\nnpm install pineapple-lumps --save\n```\n\n- Require the package into your project\n``` javascript\nconst pineappleLumps = require(\'pineapple-lumps\');\n```\n\n- Pass in a date reference to get the comparison.\n``` javascript\nconst comparison = pineappleLumps(\'2016-01-01T09:45:00+12:00\'); // In three days, 1st Jan 2016\n```\n\n## License\n\nMIT\n',
+18 silly publish   readmeFilename: 'README.md',
+18 silly publish   gitHead: '8a25bbd3e9d18bc65b0d446468c374df23f86745',
+18 silly publish   _id: 'pineapple-lumps@0.0.8',
+18 silly publish   _shasum: '2bdf49943ae83f6aaeed1c17e843059156fa6380',
+18 silly publish   _from: '.' }
+19 verbose getPublishConfig undefined
+20 silly mapToRegistry name pineapple-lumps
+21 silly mapToRegistry using default registry
+22 silly mapToRegistry registry https://registry.npmjs.org/
+23 silly mapToRegistry uri https://registry.npmjs.org/pineapple-lumps
+24 verbose publish registryBase https://registry.npmjs.org/
+25 silly publish uploading /Users/devon-church/.npm/pineapple-lumps/0.0.8/package.tgz
+26 verbose request uri https://registry.npmjs.org/pineapple-lumps
+27 verbose request sending authorization for write operation
+28 info attempt registry request try #1 at 10:09:44 PM
+29 verbose request using bearer token for auth
+30 verbose request id 83fc5c30f9e9a440
+31 http request PUT https://registry.npmjs.org/pineapple-lumps
+32 http 403 https://registry.npmjs.org/pineapple-lumps
+33 verbose headers { 'content-type': 'application/json',
+33 verbose headers   'cache-control': 'max-age=300',
+33 verbose headers   'content-length': '95',
+33 verbose headers   'accept-ranges': 'bytes',
+33 verbose headers   date: 'Sun, 19 Jun 2016 10:09:44 GMT',
+33 verbose headers   via: '1.1 varnish',
+33 verbose headers   connection: 'keep-alive',
+33 verbose headers   'x-served-by': 'cache-akl6420-AKL',
+33 verbose headers   'x-cache': 'MISS',
+33 verbose headers   'x-cache-hits': '0',
+33 verbose headers   'x-timer': 'S1466330984.250343,VS0,VE644',
+33 verbose headers   vary: 'Accept-Encoding' }
+34 verbose request invalidating /Users/devon-church/.npm/registry.npmjs.org/pineapple-lumps on PUT
+35 error publish Failed PUT 403
+36 verbose stack Error: "You cannot publish over the previously published version 0.0.8." : pineapple-lumps
+36 verbose stack     at makeError (/Users/devon-church/.nvm/versions/v5.0.0/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:264:12)
+36 verbose stack     at CachingRegistryClient.<anonymous> (/Users/devon-church/.nvm/versions/v5.0.0/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:252:14)
+36 verbose stack     at Request._callback (/Users/devon-church/.nvm/versions/v5.0.0/lib/node_modules/npm/node_modules/npm-registry-client/lib/request.js:172:14)
+36 verbose stack     at Request.self.callback (/Users/devon-church/.nvm/versions/v5.0.0/lib/node_modules/npm/node_modules/request/request.js:198:22)
+36 verbose stack     at emitTwo (events.js:87:13)
+36 verbose stack     at Request.emit (events.js:172:7)
+36 verbose stack     at Request.<anonymous> (/Users/devon-church/.nvm/versions/v5.0.0/lib/node_modules/npm/node_modules/request/request.js:1063:14)
+36 verbose stack     at emitOne (events.js:82:20)
+36 verbose stack     at Request.emit (events.js:169:7)
+36 verbose stack     at IncomingMessage.<anonymous> (/Users/devon-church/.nvm/versions/v5.0.0/lib/node_modules/npm/node_modules/request/request.js:1009:12)
+37 verbose statusCode 403
+38 verbose pkgid pineapple-lumps
+39 verbose cwd /Users/devon-church/Documents/projects/pineapple-lumps
+40 error Darwin 15.3.0
+41 error argv "/Users/devon-church/.nvm/versions/v5.0.0/bin/node" "/Users/devon-church/.nvm/versions/v5.0.0/bin/npm" "publish"
+42 error node v5.0.0
+43 error npm  v3.3.6
+44 error code E403
+45 error "You cannot publish over the previously published version 0.0.8." : pineapple-lumps
+46 error If you need help, you may report this error at:
+46 error     <https://github.com/npm/npm/issues>
+47 verbose exit [ 1, true ]
